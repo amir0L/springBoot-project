@@ -1,4 +1,4 @@
-package com.amir.RESTfulApi.Question;
+package com.amir.RESTfulApi.question;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,6 @@
-package com.amir.RESTfulApi.Question;
+package com.amir.RESTfulApi.question;
 
 
-import com.amir.RESTfulApi.matiere.Matiere;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
