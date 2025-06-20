@@ -164,7 +164,9 @@ public class MatiereController {
         }
     }
 
-    // Get overall average grades
+    // ================== AVERAGE CALCULATION ENDPOINTS ==================
+
+    // Get overall average grades (exam + homework1 + homework2)
     @GetMapping("/average")
     public ResponseEntity<Double> getOverallAverageGrades() {
         try {
@@ -175,11 +177,125 @@ public class MatiereController {
         }
     }
 
-    // Get overall average grades by user ID
+    // Get overall average grades by user ID (exam + homework1 + homework2)
     @GetMapping("/user/{userId}/average")
     public ResponseEntity<Double> getOverallAverageGradesByUser(@PathVariable Integer userId) {
         try {
             Double average = matiereService.getOverallAverageGradesByUser(userId);
+            return ResponseEntity.ok(average);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    // Get overall average grades with one homework (exam + homework1)
+    @GetMapping("/average/one-homework")
+    public ResponseEntity<Double> getOverallAverageGradesOneHomework() {
+        try {
+            Double average = matiereService.getOverallAverageGradesOneHomework();
+            return ResponseEntity.ok(average);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    // Get overall average grades by user ID with one homework (exam + homework1)
+    @GetMapping("/user/{userId}/average/one-homework")
+    public ResponseEntity<Double> getOverallAverageGradesOneHomeworkByUser(@PathVariable Integer userId) {
+        try {
+            Double average = matiereService.getOverallAverageGradesOneHomeworkByUser(userId);
+            return ResponseEntity.ok(average);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    // Get overall average grades with two homeworks only (homework1 + homework2)
+    @GetMapping("/average/two-homeworks")
+    public ResponseEntity<Double> getOverallAverageGradesTwoHomeworks() {
+        try {
+            Double average = matiereService.getOverallAverageGradesTwoHomeworks();
+            return ResponseEntity.ok(average);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    // Get overall average grades by user ID with two homeworks only (homework1 + homework2)
+    @GetMapping("/user/{userId}/average/two-homeworks")
+    public ResponseEntity<Double> getOverallAverageGradesTwoHomeworksByUser(@PathVariable Integer userId) {
+        try {
+            Double average = matiereService.getOverallAverageGradesTwoHomeworksByUser(userId);
+            return ResponseEntity.ok(average);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    // ================== SPECIFIC MATIERE AVERAGE ENDPOINTS ==================
+
+    // Get average grade for a specific matiere by user ID (all three grades)
+    @GetMapping("/user/{userId}/matiere/{matiereName}/average")
+    public ResponseEntity<Double> getAverageGradeForSpecificMatiereByUser(
+            @PathVariable Integer userId,
+            @PathVariable String matiereName) {
+        try {
+            Double average = matiereService.getAverageGradeForSpecificMatiereByUser(userId, matiereName);
+            return ResponseEntity.ok(average);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    // Get average grade for a specific matiere by user ID (exam + homework1)
+    @GetMapping("/user/{userId}/matiere/{matiereName}/average/one-homework")
+    public ResponseEntity<Double> getAverageGradeForSpecificMatiereByUserOneHomework(
+            @PathVariable Integer userId,
+            @PathVariable String matiereName) {
+        try {
+            Double average = matiereService.getAverageGradeForSpecificMatiereByUserOneHomework(userId, matiereName);
+            return ResponseEntity.ok(average);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    // Get average grade for a specific matiere by user ID (homework1 + homework2)
+    @GetMapping("/user/{userId}/matiere/{matiereName}/average/two-homeworks")
+    public ResponseEntity<Double> getAverageGradeForSpecificMatiereByUserTwoHomeworks(
+            @PathVariable Integer userId,
+            @PathVariable String matiereName) {
+        try {
+            Double average = matiereService.getAverageGradeForSpecificMatiereByUserTwoHomeworks(userId, matiereName);
+            return ResponseEntity.ok(average);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    // Get average grade for a specific matiere by user ID and school year
+    @GetMapping("/user/{userId}/matiere/{matiereName}/year/{anneeScolaire}/average")
+    public ResponseEntity<Double> getAverageGradeForSpecificMatiereByUserAndYear(
+            @PathVariable Integer userId,
+            @PathVariable String matiereName,
+            @PathVariable Integer anneeScolaire) {
+        try {
+            Double average = matiereService.getAverageGradeForSpecificMatiereByUserAndYear(userId, matiereName, anneeScolaire);
+            return ResponseEntity.ok(average);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    // Get average grade for a specific matiere by user ID, school year, and trimester
+    @GetMapping("/user/{userId}/matiere/{matiereName}/year/{anneeScolaire}/trimester/{trimestre}/average")
+    public ResponseEntity<Double> getAverageGradeForSpecificMatiereByUserYearAndTrimester(
+            @PathVariable Integer userId,
+            @PathVariable String matiereName,
+            @PathVariable Integer anneeScolaire,
+            @PathVariable Integer trimestre) {
+        try {
+            Double average = matiereService.getAverageGradeForSpecificMatiereByUserYearAndTrimester(userId, matiereName, anneeScolaire, trimestre);
             return ResponseEntity.ok(average);
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();

@@ -169,6 +169,7 @@ public class MatiereService {
                 .collect(Collectors.toList());
     }
 
+    // Average grades with all three components (exam + homework1 + homework2)
     public Double getOverallAverageGrades() {
         return matiereRepository.getOverallAverageGrades();
     }
@@ -180,6 +181,84 @@ public class MatiereService {
         }
 
         return matiereRepository.getOverallAverageGradesByUserId(userId);
+    }
+
+    // Average grades with one homework (exam + homework1)
+    public Double getOverallAverageGradesOneHomework() {
+        return matiereRepository.getOverallAverageGradesOneHomework();
+    }
+
+    public Double getOverallAverageGradesOneHomeworkByUser(Integer userId) {
+        // Check if user exists
+        if (!userRepository.existsById(userId)) {
+            throw new RuntimeException("User not found with id: " + userId);
+        }
+
+        return matiereRepository.getOverallAverageGradesOneHomeworkByUserId(userId);
+    }
+
+    // Average grades with two homeworks only (homework1 + homework2)
+    public Double getOverallAverageGradesTwoHomeworks() {
+        return matiereRepository.getOverallAverageGradesTwoHomeworks();
+    }
+
+    public Double getOverallAverageGradesTwoHomeworksByUser(Integer userId) {
+        // Check if user exists
+        if (!userRepository.existsById(userId)) {
+            throw new RuntimeException("User not found with id: " + userId);
+        }
+
+        return matiereRepository.getOverallAverageGradesTwoHomeworksByUserId(userId);
+    }
+
+    // Average grade for a specific matiere by user (all three grades)
+    public Double getAverageGradeForSpecificMatiereByUser(Integer userId, String matiereName) {
+        // Check if user exists
+        if (!userRepository.existsById(userId)) {
+            throw new RuntimeException("User not found with id: " + userId);
+        }
+
+        return matiereRepository.getAverageGradeForSpecificMatiereByUser(userId, matiereName);
+    }
+
+    // Average grade for a specific matiere by user (exam + homework1)
+    public Double getAverageGradeForSpecificMatiereByUserOneHomework(Integer userId, String matiereName) {
+        // Check if user exists
+        if (!userRepository.existsById(userId)) {
+            throw new RuntimeException("User not found with id: " + userId);
+        }
+
+        return matiereRepository.getAverageGradeForSpecificMatiereByUserOneHomework(userId, matiereName);
+    }
+
+    // Average grade for a specific matiere by user (homework1 + homework2)
+    public Double getAverageGradeForSpecificMatiereByUserTwoHomeworks(Integer userId, String matiereName) {
+        // Check if user exists
+        if (!userRepository.existsById(userId)) {
+            throw new RuntimeException("User not found with id: " + userId);
+        }
+
+        return matiereRepository.getAverageGradeForSpecificMatiereByUserTwoHomeworks(userId, matiereName);
+    }
+
+    // Average grade for a specific matiere by user and school year
+    public Double getAverageGradeForSpecificMatiereByUserAndYear(Integer userId, String matiereName, Integer anneeScolaire) {
+        // Check if user exists
+        if (!userRepository.existsById(userId)) {
+            throw new RuntimeException("User not found with id: " + userId);
+        }
+
+        return matiereRepository.getAverageGradeForSpecificMatiereByUserAndYear(userId, matiereName, anneeScolaire);
+    }
+
+    // Average grade for a specific matiere by user, school year, and trimester
+    public Double getAverageGradeForSpecificMatiereByUserYearAndTrimester(Integer userId, String matiereName, Integer anneeScolaire, Integer trimestre) {
+        // Check if user exists
+        if (!userRepository.existsById(userId)) {
+            throw new RuntimeException("User not found with id: " + userId);
+        }
+
+        return matiereRepository.getAverageGradeForSpecificMatiereByUserYearAndTrimester(userId, matiereName, anneeScolaire, trimestre);
     }
 
     // Helper method to calculate average grade for a single matiere
